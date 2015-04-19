@@ -26,7 +26,7 @@ namespace Aspects.Diagnostics
         /// <summary>
         /// The primitive public properties of the type.
         /// </summary>
-        private List<PropertyInfo> primitivePublicProperties;
+        private List<PropertyInfo> publicPropertiesForRendering;
 
         /// <summary>
         /// A list of non-primitive types that have a reasonable default print form, so they are included in the ToString implementation.
@@ -49,12 +49,14 @@ namespace Aspects.Diagnostics
         {
             base.CompileTimeInitialize(type, aspectInfo);
 
-            this.primitivePublicProperties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            this.publicPropertiesForRendering = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(property => (
                     property.PropertyType.IsPrimitive ||
                     property.PropertyType.IsValueType ||
                     renderedNonPrimitiveTypes.Contains(property.PropertyType) ||
-                    (property.PropertyType.GetGenericArguments().Any(t => t.IsValueType || t.IsPrimitive))
+                    (property.PropertyType.GetGenericArguments().Any(t => t.IsValueType || t.IsPrimitive)) ||
+                    this.HasOverridenToString(property.PropertyType) ||
+                    this.HasToStringAspectAttribute(property.PropertyType)
                     ) && property.CanRead)
                 .ToList();
         }
@@ -67,7 +69,7 @@ namespace Aspects.Diagnostics
             this.toStringDelegate = () =>
             {
                 StringBuilder builder = new StringBuilder();
-                foreach (var property in this.primitivePublicProperties)
+                foreach (var property in this.publicPropertiesForRendering)
                 {
                     var value = property.GetValue(this.Instance) ?? "Is Null";
                     builder.AppendLine(string.Format("{0} : {1}", property.Name, value.ToString()));
@@ -96,6 +98,39 @@ namespace Aspects.Diagnostics
         public override string ToString()
         {
             return this.toStringDelegate.Invoke();
+        }
+
+        /// <summary>
+        /// Determines if there is a ToString override on the given type (i.e. it is not object.ToString()) - if there is we can assume it can be "printed" to a string in a sensible way.
+        /// </summary>
+        /// <param name="propertyType">The type that should be tested for a tostring override</param>
+        /// <returns>True if ToString is implemented/overriden false otherwise</returns>
+        private bool HasOverridenToString(Type propertyType)
+        {
+            var methodInfo = propertyType.GetMethod("ToString");
+            if (methodInfo.GetBaseDefinition().DeclaringType != methodInfo.DeclaringType)
+            {
+                return true;
+            }
+
+            // If the ToString method is overriden somewhere in the hierarchy that is not on System.Object - then just use that ToString Implementation
+            if (methodInfo.GetBaseDefinition().DeclaringType.Name != "Object")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines if the type is annotated with this attribute, if it is ToString will be implemented for it once the postsharp weaver has done its work.
+        /// </summary>
+        /// <param name="propertyType">The type that should be tested for an aspect attribution</param>
+        /// <returns>True if there if this aspect is applied to the type, false otherwise</returns>
+        /// <remarks>The reasonsing behind doing the code like this is that the weaver might not have gotten arround to implementing to string on the type when it is referenced here so the ToString override test won't nessecarily work.</remarks>
+        private bool HasToStringAspectAttribute(Type propertyType)
+        {
+            return propertyType.GetCustomAttributes<ToStringAspect>(true).Any();
         }
     }
 }
