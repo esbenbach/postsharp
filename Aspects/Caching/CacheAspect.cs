@@ -1,16 +1,9 @@
-﻿// <copyright file="CacheAspect.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email>esbbach@infosoft.no</email>
-// <date>10/15/2012 12:28:31 PM</date>
-// <summary>Provides caching for a decorated method</summary>
-namespace Infosoft.Library.Caching
+﻿namespace Aspects.Caching
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using Infosoft.Library.Caching.Implementations;
+    using Aspects.Caching.Implementations;
     using PostSharp.Aspects;
     using PostSharp.Aspects.Dependencies;
     using PostSharp.Extensibility;

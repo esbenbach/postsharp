@@ -1,16 +1,10 @@
-﻿// <copyright file="CacheInvalidationAspect.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>10/16/2012 9:58:54 AM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using Infosoft.Library.Caching.Implementations;
+    using Aspects.Caching.Implementations;
     using log4net;
     using PostSharp.Aspects;
     using PostSharp.Aspects.Dependencies;

@@ -1,11 +1,5 @@
-﻿// <copyright file="ICacheItemPolicy.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>23/10/2012 10:45:01 AM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     using System;
     using System.Collections.Generic;

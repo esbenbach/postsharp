@@ -1,11 +1,5 @@
-﻿// <copyright file="ICacheAdapter.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>10/15/2012 2:30:56 PM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     /// <summary>
     /// Represents an adapter to a cache provider

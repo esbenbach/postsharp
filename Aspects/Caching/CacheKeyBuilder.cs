@@ -1,11 +1,5 @@
-﻿// <copyright file="CacheKeyBuilder.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>10/15/2012 12:58:00 PM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     using System;
     using System.Collections.Generic;

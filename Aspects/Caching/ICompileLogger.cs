@@ -1,11 +1,5 @@
-﻿// <copyright file="ICompileLogger.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>10/24/2012 7:14:28 AM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     using System.Reflection;
 

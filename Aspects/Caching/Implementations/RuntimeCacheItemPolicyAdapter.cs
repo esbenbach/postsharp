@@ -1,11 +1,5 @@
-﻿// <copyright file="RuntimeCacheItemPolicyAdapter.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>10/23/2012 12:43:06 PM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching.Implementations
+﻿
+namespace Aspects.Caching.Implementations
 {
     using System;
     using System.Runtime.Caching;

@@ -1,11 +1,4 @@
-﻿// <copyright file="CacheAspectBase.cs" company="Infosoft AS">
-// Copyright (c) 2012 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>12/10/2014 1:46:52 PM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿namespace Aspects.Caching
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

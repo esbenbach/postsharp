@@ -1,11 +1,5 @@
-﻿// <copyright file="CacheSettingsRepository.cs" company="Infosoft AS">
-// Copyright (c) 2014 All Rights Reserved
-// </copyright>
-// <author>esbbach</author>
-// <email></email>
-// <date>12/10/2014 11:30:49 AM</date>
-// <summary></summary>
-namespace Infosoft.Library.Caching
+﻿
+namespace Aspects.Caching
 {
     using System;
     using System.Collections.Concurrent;
