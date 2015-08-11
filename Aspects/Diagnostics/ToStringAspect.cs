@@ -62,6 +62,17 @@ namespace Aspects.Diagnostics
         }
 
         /// <summary>
+        /// Validate compiletime behvaior of the aspect
+        /// </summary>
+        /// <param name="type">The type the aspect is applied to</param>
+        /// <returns>true if validation passes, otherwise false (if false the aspect won't be applied)</returns>
+        public override bool CompileTimeValidate(Type type)
+        {
+            // Makes sure that we only override ToString where it isnt already declared.
+            return type.GetMethod("ToString", BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public) == null;
+        }
+
+        /// <summary>
         /// Initializes the aspect instance. This will instantiate the delegate that will be invoked when ToString is invoked.
         /// </summary>
         public override void RuntimeInitializeInstance()
@@ -94,7 +105,7 @@ namespace Aspects.Diagnostics
         /// <returns>
         /// A <see cref="System.String" /> that represents this instance.
         /// </returns>
-        [IntroduceMember(OverrideAction = MemberOverrideAction.OverrideOrIgnore)]
+        [IntroduceMember(OverrideAction = MemberOverrideAction.OverrideOrIgnore, IsVirtual = true)]
         public override string ToString()
         {
             return this.toStringDelegate.Invoke();
