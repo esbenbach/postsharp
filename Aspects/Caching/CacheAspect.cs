@@ -172,7 +172,7 @@ namespace Infosoft.Library.Caching
             {
                 lock (this.syncRoot)
                 {
-                    if (!this.cacheAdapter.Contains(key))
+                    if (!this.cacheAdapter.Contains(key, this.Region))
                     {
                         this.LogToDebugIfEnabled("Key {0} not in cache executing method {1}", key, this.methodName);
 

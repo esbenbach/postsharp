@@ -16,47 +16,12 @@ namespace Infosoft.Library.Caching.Implementations
     public class RuntimeCacheItemPolicyAdapter : ICacheItemPolicy
     {
         /// <summary>
-        /// Policy instance
-        /// </summary>
-        private CacheItemPolicy instance;
-
-        /// <summary>
-        /// The absolute expiration time measured in seconds
-        /// </summary>
-        private int absoluteExpirationSeconds;
-
-        /// <summary>
-        /// Sliding expiration time measured in seconds
-        /// </summary>
-        private int slidingExpirationSeconds;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RuntimeCacheItemPolicyAdapter" /> class.
-        /// </summary>
-        public RuntimeCacheItemPolicyAdapter()
-        {
-            this.instance = new CacheItemPolicy();
-        }
-
-        /// <summary>
         /// Gets or sets the absolute cache expiration.
         /// </summary>
         /// <value>
         /// The absolute expiration.
         /// </value>
-        public int AbsoluteExpiration
-        {
-            get
-            {
-                return this.absoluteExpirationSeconds;
-            }
-
-            set
-            {
-                this.absoluteExpirationSeconds = value;
-                this.UpdateAbsoluteExpiration();
-            }
-        }
+        public int AbsoluteExpiration { get; set; }
 
         /// <summary>
         /// Gets or sets the sliding cache expiration.
@@ -64,19 +29,7 @@ namespace Infosoft.Library.Caching.Implementations
         /// <value>
         /// The sliding expiration.
         /// </value>
-        public int SlidingExpiration
-        {
-            get
-            {
-                return this.slidingExpirationSeconds;
-            }
-
-            set
-            {
-                this.slidingExpirationSeconds = value;
-                this.UpdateSlidingExpiration();
-            }
-        }
+        public int SlidingExpiration { get; set; }
 
         /// <summary>
         /// Gets the actual policy instance.
@@ -84,29 +37,11 @@ namespace Infosoft.Library.Caching.Implementations
         /// <returns>A cache item policy</returns>
         public CacheItemPolicy GetInstance()
         {
-            return this.instance;
-        }
-
-        /// <summary>
-        /// Updates the sliding expiration for the instance
-        /// </summary>
-        private void UpdateSlidingExpiration()
-        {
-            if (this.SlidingExpiration != 0 && this.SlidingExpiration != int.MinValue)
+            return new CacheItemPolicy()
             {
-                this.instance.SlidingExpiration = TimeSpan.FromSeconds(this.SlidingExpiration);
-            }
-        }
-
-        /// <summary>
-        /// Updates the absolute expiration for the instance
-        /// </summary>
-        private void UpdateAbsoluteExpiration()
-        {
-            if (this.AbsoluteExpiration != 0 && this.AbsoluteExpiration != int.MinValue)
-            {
-                this.instance.AbsoluteExpiration = DateTimeOffset.UtcNow.AddSeconds(this.AbsoluteExpiration);
-            }
+                AbsoluteExpiration = this.AbsoluteExpiration != 0 ? DateTimeOffset.Now.AddSeconds(this.AbsoluteExpiration) : ObjectCache.InfiniteAbsoluteExpiration,
+                SlidingExpiration = this.SlidingExpiration != 0 ? TimeSpan.FromSeconds(this.SlidingExpiration) : ObjectCache.NoSlidingExpiration
+            };
         }
     }
 }

@@ -106,9 +106,9 @@ namespace Infosoft.Library.Caching
                 string key = this.keyBuilder.BuildCacheKey(args.Arguments.ToArray());
                 this.LogToDebugIfEnabled("Trying to remove cache entry for key {0}", key);
 
-                if (this.cacheAdapter.Contains(key))
+                if (this.cacheAdapter.Contains(key, this.Region))
                 {
-                    this.cacheAdapter.Delete(key);
+                    this.cacheAdapter.Delete(key, this.Region);
                 }
             }
         }

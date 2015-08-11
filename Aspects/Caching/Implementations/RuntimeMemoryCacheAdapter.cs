@@ -85,7 +85,7 @@ namespace Infosoft.Library.Caching.Implementations
         /// <param name="cacheRegion">The cache region.</param>
         public void Delete(string key, string cacheRegion)
         {
-            cache.Remove(key, null);
+            cache.Remove(this.GetCacheKey(key, cacheRegion), null);
         }
 
         /// <summary>
