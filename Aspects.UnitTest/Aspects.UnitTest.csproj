@@ -71,6 +71,11 @@
     <Compile Include="Stubs\StubedCacheClass.cs" />
     <Compile Include="ToStringTests.cs" />
     <Compile Include="CacheAspectTest.cs" />
+    <Compile Include="CacheKeyBuilderTest.cs" />
+    <Compile Include="CacheInvalidationAspectTest.cs" />
+    <Compile Include="RequirementsValidatorTest.cs" />
+    <Compile Include="RuntimeMemoryCacheAdapterTest.cs" />
+    <Compile Include="AuthorizedAspectTest.cs" />
     <Compile Include="WCFServiceAspectProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
