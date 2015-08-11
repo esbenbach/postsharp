@@ -49,6 +49,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -70,6 +71,7 @@
     <Compile Include="Stubs\StubedCacheClass.cs" />
     <Compile Include="ToStringTests.cs" />
     <Compile Include="CacheAspectTest.cs" />
+    <Compile Include="WCFServiceAspectProviderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aspects\Aspects.csproj">

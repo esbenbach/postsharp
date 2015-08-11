@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizedAspect.cs" />
     <Compile Include="Diagnostics\ToStringAspect.cs" />
+    <Compile Include="Services\WCFServiceLoggingAspectProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Aspects.ruleset" />
