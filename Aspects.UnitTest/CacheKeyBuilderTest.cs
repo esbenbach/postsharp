@@ -140,5 +140,69 @@
             // Assert
             mockCache.Verify(mock => mock.GetCacheKey(), Times.Once(), "Cache key implementation must be called exactly once");
         }
+
+        [TestMethod]
+        public void CacheKeyBuilderIgnoreParameters_BuildKeyNoOverride_BuildKeyFromTypeNameWithoutParameters()
+        {
+            // Arrange
+            var cachedType = typeof(StubCachedClass);
+            var cachedMethod = cachedType.GetMethod("GetValue");
+            var keyBuilder = new CacheKeyBuilder(cachedMethod, behavior: CacheKeyBehavior.IgnoreParameters);
+
+            // Act
+            var actualResult = keyBuilder.BuildCacheKey(new object[] { "awesome" });
+
+            // Assert
+            string expectedResult = "Aspects.UnitTest.Stubs.StubCachedClass.GetValue";
+            Assert.AreEqual(expectedResult, actualResult, "Building a cache key using no overrides should generate a valid key using all parameters and values, regardless of behavior.");
+        }
+
+        [TestMethod]
+        public void CacheKeyBuilderIgnoreParameters_BuildKeyPrefixOverride_BuildKeyUsingPrefixAndParameters()
+        {
+            // Arrange
+            var cachedType = typeof(StubCachedClass);
+            var cachedMethod = cachedType.GetMethod("GetValue");
+            var keyBuilder = new CacheKeyBuilder(cachedMethod, "TestingPrefix", behavior: CacheKeyBehavior.IgnoreParameters);
+
+            // Act
+            var actualResult = keyBuilder.BuildCacheKey(new object[] { "awesome" });
+
+            // Assert
+            string expectedResult = "TestingPrefix";
+            Assert.AreEqual(expectedResult, actualResult, "Building a cache key using a key prefix override should generate a valid key with only the specified prefix (when ignore parameters behavior is used)");
+        }
+
+        [TestMethod]
+        public void CacheKeyBuilderIgnoreParameters_BuildKeyPrefixSelectedParameter_UsePrefixIgnoreSelection()
+        {
+            // Arrange
+            var cachedType = typeof(StubCachedClass);
+            var cachedMethod = cachedType.GetMethod("GetValue2");
+            var keyBuilder = new CacheKeyBuilder(cachedMethod, "TestingPrefix", "dummyParameter", behavior: CacheKeyBehavior.IgnoreParameters);
+
+            // Act
+            var actualResult = keyBuilder.BuildCacheKey(new object[] { "awesome", "notSoAwesome" });
+
+            // Assert
+            string expectedResult = "TestingPrefix";
+            Assert.AreEqual(expectedResult, actualResult, "Overriding prefix and parameter was should result in a key with only prefix when ignore parameters is the behavior");
+        }
+
+        [TestMethod]
+        public void CacheKeyBuilderIgnoreParameters_BuildMultipleParameter_UseTypePrefix()
+        {
+            // Arrange
+            var cachedType = typeof(StubCachedClass);
+            var cachedMethod = cachedType.GetMethod("GetValue2");
+            var keyBuilder = new CacheKeyBuilder(cachedMethod, parameters: "dummyParameter,keyValue", behavior: CacheKeyBehavior.IgnoreParameters);
+
+            // Act
+            var actualResult = keyBuilder.BuildCacheKey(new object[] { "awesome", "notSoAwesome" });
+
+            // Assert
+            string expectedResult = "Aspects.UnitTest.Stubs.StubCachedClass.GetValue2";
+            Assert.AreEqual(expectedResult, actualResult, "Overriding parameter (not prefix) should result in a key only the type as prefix and the value of the given parameters should be ignored when behavior is IgnoreParameters");
+        }
     }
 }
