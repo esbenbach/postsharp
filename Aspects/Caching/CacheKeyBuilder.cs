@@ -50,10 +50,7 @@ namespace Aspects.Caching
             // The string will be build in a form of "ParameterName = {0}", where {0} should be replaced with an index from the list of included indices
             // If parameters are explicitly ignored we won't bother generating this string
             this.methodCacheKeyArgumentIndicies = new List<int>();
-            if (!this.Behavior.HasFlag(CacheKeyBehavior.IgnoreParameters))
-            {
-                this.parameterFormatString = this.BuildMethodParameterFormatString(method, parameters);
-            }
+            this.parameterFormatString = this.BuildMethodParameterFormatString(method, parameters);
         }
 
         /// <summary>
@@ -146,6 +143,7 @@ namespace Aspects.Caching
             // Explicitly ignored!
             if (this.Behavior.HasFlag(CacheKeyBehavior.IgnoreParameters))
             {
+                this.ParametersUsed = new ParameterInfo[] { };
                 return string.Empty;
             }
 
