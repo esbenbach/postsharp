@@ -119,6 +119,13 @@ namespace Aspects.Diagnostics
         private bool HasOverridenToString(Type propertyType)
         {
             var methodInfo = propertyType.GetMethod("ToString");
+
+            if (methodInfo == null)
+            {
+                // This typically happens for interfaces that does not inherit from object (it might actually be the only case)
+                return false;
+            }
+
             if (methodInfo.GetBaseDefinition().DeclaringType != methodInfo.DeclaringType)
             {
                 return true;
