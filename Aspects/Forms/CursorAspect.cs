@@ -1,9 +1,8 @@
-﻿// <copyright file="CursorAspect.cs" company="Infosoft AS">
-// Copyright (c) 2017 All Rights Reserved
+﻿// <copyright file="CursorAspect.cs">
 // </copyright>
-// <author>esbbach</author>
-// <email>esbbach@INFOSOFT</email>
-// <date>4/20/2017 7:58:22 AM</date>
+// <author></author>
+// <email></email>
+// <date></date>
 // <summary></summary>
 namespace Aspects.Forms
 {

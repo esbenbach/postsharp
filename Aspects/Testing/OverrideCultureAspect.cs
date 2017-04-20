@@ -1,9 +1,7 @@
-﻿// <copyright file="OverrideCultureAspect.cs" company="Infosoft AS">
-// Copyright (c) 2017 All Rights Reserved
+﻿// <copyright file="OverrideCultureAspect.cs">
 // </copyright>
-// <author>esbbach</author>
-// <email>esbbach@INFOSOFT</email>
-// <date>4/20/2017 8:08:11 AM</date>
+// <author></author>
+// <date></date>
 // <summary></summary>
 namespace Aspects.Testing
 {
