@@ -93,6 +93,7 @@
     <Compile Include="Security\AuthorizedAspect.cs" />
     <Compile Include="Diagnostics\ToStringAspect.cs" />
     <Compile Include="Services\WCFServiceLoggingAspectProvider.cs" />
+    <Compile Include="Testing\OverrideCultureAspect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Aspects.ruleset" />
