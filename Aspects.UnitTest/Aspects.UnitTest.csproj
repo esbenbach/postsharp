@@ -69,8 +69,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyHashCodeAspectTest.cs" />
     <Compile Include="Stubs\IDummyInterface.cs" />
     <Compile Include="Stubs\StubedCacheClass.cs" />
+    <Compile Include="Stubs\StubWithProperties.cs" />
     <Compile Include="ToStringTests.cs" />
     <Compile Include="CacheAspectTest.cs" />
     <Compile Include="CacheKeyBuilderTest.cs" />
