@@ -15,21 +15,8 @@
         [TestMethod]
         public void GetHashCode_ReturnsCorrectHashCode()
         {
-            var stub = new StubWithProperties() { MyFirstProperty = "AString", MySecondProperty = 123 };
-
-            var expectedHash = stub.MyFirstProperty.GetHashCode() ^ stub.MySecondProperty.GetHashCode();
-
-            Assert.AreEqual(expectedHash, stub.GetHashCode());
-        }
-
-        [TestMethod]
-        public void GetHashCode_OrderIsIrrelevant()
-        {
-            var stub = new StubWithProperties() { MyFirstProperty = "AString", MySecondProperty = 123 };
-
-            var expectedHash =  stub.MySecondProperty.GetHashCode() ^ stub.MyFirstProperty.GetHashCode();
-
-            Assert.AreEqual(expectedHash, stub.GetHashCode());
+            var stub = new StubWithProperties() { MyFirstProperty = "AString", MySecondProperty = 123, MyDateProperty = new DateTime(2010, 10, 12), MyThirdProperty = true };
+            Assert.AreEqual(1033763843, stub.GetHashCode());
         }
     }
 }

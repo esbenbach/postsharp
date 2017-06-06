@@ -5,6 +5,7 @@
 // <email>esbbach@INFOSOFT</email>
 // <date>6/6/2017 11:14:57 AM</date>
 // <summary></summary>
+using System;
 using Aspects.Object;
 
 namespace Aspects.UnitTest.Stubs
@@ -18,5 +19,9 @@ namespace Aspects.UnitTest.Stubs
         public string MyFirstProperty { get; set; }
 
         public int MySecondProperty { get; set; }
+
+        public bool MyThirdProperty { get; set; }
+
+        public DateTime MyDateProperty { get; set; }
     }
 }
