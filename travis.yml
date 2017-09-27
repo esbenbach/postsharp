@@ -1,0 +1,18 @@
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "RmL1KRvY4dxCqzGuPVfnZrUyxCsxizIJ/X0M2eoBbAE1bk6lgWx52XOtDyw5K3Dun/tLplJS9mMftv/rVAZ/5HoQERLnUHs7m6e/GnveUzoCAg5yk2qQWuec2wy4kkRWpEnj0SfoWMEKWb70aJTsfCy74vjbbv1awmjfDndopXFCCl+VlETi1Hx1QiNkdNVee+7nwmZAdNohepd2vKuLJt8OG7FV4QxV23lFIbMsPBG72tCOrk4JUXBPcNPcjv/Z6iNy/0ZVBmaHj8xCHJLpOKjfF3ETEO71rWBSOMvc/rXycEPRlV+2vj0Nfag8YkvibqL43b6Ma0DDP1Hmc63mXxP0fQ7kxOk1pp/QGooDkd/XAwAXnxRJIwHMron4arZgxgIxFyuO0yK3QSMnBEj5mx7NxcjSMujzPg2gofufHw116NJ0/TYM9kxWy9+aVIfKGA09XA2YWwOvkdS/+SxzXXHJ2ZwUTipiSnv2ylWq8sfCTuDv0lbKaqCZuzguJ8ibmDErjuHHgC8/M/7unaPP1XNRneOeZlK3T6mNPIi74iF6NY0DWtpHxGChhD+VrKPtJ4l6KEtn3Lhb0kcRDJ689GMa8l8s1ATznVAAt8EfwHt7ipaLXCICMDIkVRNcG7z0Htg+j+pvuBF27d6O0z/CCOOC+YEJiCMtLIbD2+peCww="
+
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "esbenbach/postsharp"
+      description: "Build submitted via Travis CI"
+    notification_email: esben@ofn.dk
+    build_command_prepend: "msbuild /t:Clean"
+    build_command:   "msbuild Postsharp.sln"
+    branch_pattern: coverity_scan
