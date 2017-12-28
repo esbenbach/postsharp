@@ -5,7 +5,7 @@
 // <email></email>
 // <date>7/30/2013 10:26:36 AM</date>
 // <summary></summary>
-namespace Infosoft.Library.Caching.Implementations
+namespace Aspects.Caching.Implementations
 {
     using System.Linq;
     using Microsoft.ApplicationServer.Caching;
@@ -19,7 +19,7 @@ namespace Infosoft.Library.Caching.Implementations
         /// The cache instance
         /// </summary>
         private static DataCache cacheInstance;
-        
+
         /// <summary>
         /// Prevents a default instance of the <see cref="AppFabricCacheAdapter"/> class from being created.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Infosoft.Library.Caching.Implementations
 
                 cacheInstance.Add(key, entry, cacheRegion);
             }
-            
+
             return true;
         }
 
