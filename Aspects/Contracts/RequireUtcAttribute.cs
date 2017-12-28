@@ -26,10 +26,11 @@ namespace Aspects.Contracts
         /// <param name="locationName">Name of the location.</param>
         /// <param name="locationKind">Location kind (<see cref="F:PostSharp.Reflection.LocationKind.Field" />, <see cref="F:PostSharp.Reflection.LocationKind.Property" />, or
         /// <see cref="F:PostSharp.Reflection.LocationKind.Parameter" />).</param>
+        /// <param name="context">Indicates the context in which the value is being validated, such as precondition or postcondition for ref method parameters.</param>
         /// <returns>
         /// An <see cref="T:System.ArgumentOutOfRangeException" /> to be thrown, or <c>null</c> if no exception needs to be thrown.
         /// </returns>
-        public Exception ValidateValue(DateTime value, string locationName, LocationKind locationKind)
+        public Exception ValidateValue(DateTime value, string locationName, LocationKind locationKind, LocationValidationContext context)
         {
             if (!IsUtcKind(value))
             {
@@ -46,17 +47,18 @@ namespace Aspects.Contracts
         /// <param name="locationName">Name of the location.</param>
         /// <param name="locationKind">Location kind (<see cref="F:PostSharp.Reflection.LocationKind.Field" />, <see cref="F:PostSharp.Reflection.LocationKind.Property" />, or
         /// <see cref="F:PostSharp.Reflection.LocationKind.Parameter" />).</param>
+        /// <param name="context">Indicates the context in which the value is being validated, such as precondition or postcondition for ref method parameters.</param>
         /// <returns>
         /// The <see cref="T:System.Exception" /> to be thrown, or <c>null</c> if no exception needs to be thrown.
         /// </returns>
-        public Exception ValidateValue(DateTime? value, string locationName, LocationKind locationKind)
+        public Exception ValidateValue(DateTime? value, string locationName, LocationKind locationKind, LocationValidationContext context)
         {
             if (value == null)
             {
                 return null;
             }
 
-            return this.ValidateValue(value.Value, locationName, locationKind);
+            return this.ValidateValue(value.Value, locationName, locationKind, context);
         }
 
         /// <summary>
