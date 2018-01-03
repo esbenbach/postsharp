@@ -4,7 +4,7 @@ namespace Aspects.Caching
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using Aspects.Caching.Implementations;
+    //using Aspects.Caching.Implementations;
     using log4net;
     using PostSharp.Aspects;
     using PostSharp.Aspects.Dependencies;
@@ -64,14 +64,14 @@ namespace Aspects.Caching
             base.RuntimeInitialize(method);
 
             // TODO: Aspect implementation currently assumes that the adapter references ONE SHARED STATIC cache instance in its implementation - not reliable
-            this.cacheAdapter = new RuntimeMemoryCacheAdapter(); // TODO: Figure out how to init this properly
+            //this.cacheAdapter = new RuntimeMemoryCacheAdapter(); // TODO: Figure out how to init this properly
         }
 
         /// <summary>
         /// Method invoked <i>instead</i> of the method to which the aspect has been applied.
         /// </summary>
         /// <param name="args">Advice arguments.</param>
-        public override void OnInvoke(MethodInterceptionArgs args)
+        public sealed override void OnInvoke(MethodInterceptionArgs args)
         {
             // Execute the original method first and let it do its job.
             args.ReturnValue = args.Invoke(args.Arguments);

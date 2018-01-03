@@ -1,123 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\PostSharp.5.0.42\build\PostSharp.props" Condition="Exists('..\packages\PostSharp.5.0.42\build\PostSharp.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AE4AD57-33D0-47A9-BFBE-B929B0D813A9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aspects</RootNamespace>
-    <AssemblyName>Aspects</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TargetFramework>netstandard2.0</TargetFramework>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Aspects.XML</DocumentationFile>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>Aspects.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>Aspects.ruleset</CodeAnalysisRuleSet>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp, Version=5.0.42.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Redist.5.0.42\lib\net45\PostSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Aggregation, Version=5.0.42.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Aggregation.Redist.5.0.42\lib\net45\PostSharp.Patterns.Aggregation.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Common, Version=5.0.42.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Common.Redist.5.0.42\lib\net45\PostSharp.Patterns.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="PostSharp.Patterns.Model, Version=5.0.42.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\packages\PostSharp.Patterns.Model.Redist.5.0.42\lib\net40\PostSharp.Patterns.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Caching\Implementations\AppFabricCacheAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caching\CachableInputAspect.cs" />
-    <Compile Include="Caching\CacheAspect.cs" />
-    <Compile Include="Caching\CacheAspectBase.cs" />
-    <Compile Include="Caching\CacheContextAttribute.cs" />
-    <Compile Include="Caching\CacheInvalidationAspect.cs" />
-    <Compile Include="Caching\CacheKeyAttribute.cs" />
-    <Compile Include="Caching\CacheKeyBehavior.cs" />
-    <Compile Include="Caching\CacheKeyBuilder.cs" />
-    <Compile Include="Caching\CacheSettings.cs" />
-    <Compile Include="Caching\CacheSettingsRepository.cs" />
-    <Compile Include="Caching\ICacheAdapter.cs" />
-    <Compile Include="Caching\ICacheItemPolicy.cs" />
-    <Compile Include="Caching\ICacheKey.cs" />
-    <Compile Include="Caching\ICompileLogger.cs" />
-    <Compile Include="Caching\Implementations\RuntimeCacheItemPolicyAdapter.cs" />
-    <Compile Include="Caching\Implementations\RuntimeMemoryCacheAdapter.cs" />
-    <Compile Include="Caching\IRequirementsValidator.cs" />
-    <Compile Include="Caching\PostsharpMessageLogger.cs" />
-    <Compile Include="Caching\RequirementsValidator.cs" />
-    <Compile Include="Contracts\RequireUtcAttribute.cs" />
-    <Compile Include="Diagnostics\MethodLogAspect.cs" />
-    <Compile Include="Diagnostics\ToJsonAspect.cs" />
-    <Compile Include="Forms\CursorAspect.cs" />
-    <Compile Include="Forms\CursorType.cs" />
-    <Compile Include="Object\PropertyHashCodeAspect.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AuthorizedAspect.cs" />
-    <Compile Include="Diagnostics\ToStringAspect.cs" />
-    <Compile Include="Services\WCFServiceLoggingAspectProvider.cs" />
-    <Compile Include="Testing\OverrideCultureAspect.cs" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="PostSharp" Version="5.0.42" />
+    <PackageReference Include="PostSharp.Patterns.Aggregation" Version="5.0.42" />
+    <PackageReference Include="PostSharp.Patterns.Common" Version="5.0.42" />
+    <PackageReference Include="PostSharp.Patterns.Model" Version="5.0.42" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Aspects.ruleset" />
-    <None Include="packages.config" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\PostSharp.5.0.42\build\PostSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.5.0.42\build\PostSharp.props'))" />
-    <Error Condition="!Exists('..\packages\PostSharp.5.0.42\build\PostSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PostSharp.5.0.42\build\PostSharp.targets'))" />
-  </Target>
-  <Import Project="..\packages\PostSharp.5.0.42\build\PostSharp.targets" Condition="Exists('..\packages\PostSharp.5.0.42\build\PostSharp.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

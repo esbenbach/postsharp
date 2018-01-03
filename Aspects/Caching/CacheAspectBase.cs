@@ -21,6 +21,12 @@
         protected ICacheAdapter cacheAdapter;
 
         /// <summary>
+        /// Caching policy
+        /// </summary>
+        [NonSerialized]
+        protected ICacheItemPolicy policyAdapter;
+
+        /// <summary>
         /// Logger instance always initialised to "Cache"
         /// </summary>
         [NonSerialized]
@@ -86,6 +92,17 @@
         [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1623:PropertySummaryDocumentationMustMatchAccessors", Justification = "The property is a named parameter in the attribute and must describe its function as such and not a property")]
         public CacheKeyBehavior KeyBuildingBehavior { get; set; }
 
+
+        /// <summary>
+        /// Factory method for creating the cache adapter.
+        /// </summary>
+        public static Func<ICacheAdapter> CacheAdapterFactory { get; set; }
+
+        /// <summary>
+        /// Factory method for creating the cache policy adapter
+        /// </summary>
+        public static Func<ICacheItemPolicy> CacheItemPolicyFactory { get; set; }
+
         /// <summary>
         /// Method invoked at build time to initialize the instance fields of the current aspect. This method is invoked
         /// before any other build-time method.
@@ -119,7 +136,22 @@
         public override void RuntimeInitialize(MethodBase method)
         {
             base.RuntimeInitialize(method);
-            this.logger = LogManager.GetLogger(CacheSettings.CacheLoggerName);
+            this.logger = LogManager.GetLogger(typeof(CacheAspectBase));
+
+            if (CacheAdapterFactory == null)
+            {
+                throw new InvalidProgramException("Must initialize cache adapter factory first!");
+            }
+
+            this.cacheAdapter = CacheAdapterFactory();
+
+            if (CacheItemPolicyFactory == null)
+            {
+                throw new InvalidProgramException("Must initialize cache item policy factory first!");
+            }
+
+            this.policyAdapter = CacheItemPolicyFactory();
+
         }
 
         /// <summary>

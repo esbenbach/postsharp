@@ -1,5 +1,5 @@
 ﻿// <copyright file="AuthorizedAspect.cs">
-// 
+//
 // </copyright>
 // <author></author>
 // <email></email>
@@ -74,11 +74,13 @@ namespace Aspects.Security
             if (!Thread.CurrentPrincipal.IsInRole(this.RequiredRole))
             {
                 var exception = new UnauthorizedAccessException(string.Format("The user is not authorized to use this function. It requires the role: {0}", this.RequiredRole));
-                var data = new Dictionary<string, string>();
-                data.Add("User", Thread.CurrentPrincipal.Identity.Name);
-                data.Add("Authenticated", Thread.CurrentPrincipal.Identity.IsAuthenticated.ToString());
-                data.Add("AuthenticationType", Thread.CurrentPrincipal.Identity.AuthenticationType);
-                data.Add("RequiredRole", this.RequiredRole);
+                var data = new Dictionary<string, string>
+                {
+                    { "User", Thread.CurrentPrincipal.Identity.Name },
+                    { "Authenticated", Thread.CurrentPrincipal.Identity.IsAuthenticated.ToString() },
+                    { "AuthenticationType", Thread.CurrentPrincipal.Identity.AuthenticationType },
+                    { "RequiredRole", this.RequiredRole }
+                };
                 throw exception;
             }
         }

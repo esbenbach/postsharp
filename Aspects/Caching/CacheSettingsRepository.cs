@@ -31,12 +31,12 @@ namespace Aspects.Caching
         /// <summary>
         /// Gets the instance of the CacheSettingsRepository
         /// </summary>
-        public static CacheSettingsRepository Instance 
-        { 
+        public static CacheSettingsRepository Instance
+        {
             get
-            { 
-                return RepositoryInstance.Value; 
-            } 
+            {
+                return RepositoryInstance.Value;
+            }
         }
 
         /// <summary>
@@ -57,8 +57,7 @@ namespace Aspects.Caching
         /// <returns>A cache settings object for the given context</returns>
         public CacheSettings Get(string contextName)
         {
-            CacheSettings setting = null;
-            this.configuredSettings.TryGetValue(contextName, out setting);
+            this.configuredSettings.TryGetValue(contextName, out CacheSettings setting);
             return setting;
         }
 
