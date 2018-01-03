@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
-    using Aspects.Caching.Implementations;
     using PostSharp.Aspects;
     using PostSharp.Aspects.Dependencies;
     using PostSharp.Extensibility;
@@ -23,12 +22,6 @@
         /// </summary>
         [NonSerialized]
         private object syncRoot;
-
-        /// <summary>
-        /// Caching policy
-        /// </summary>
-        [NonSerialized]
-        private ICacheItemPolicy policyAdapter;
 
         /// <summary>
         /// Validation of cached method
@@ -113,20 +106,14 @@
         public override void RuntimeInitialize(MethodBase method)
         {
             base.RuntimeInitialize(method);
-            
-            this.syncRoot = new object();
 
-            // Current aspect implementation assumes that the adapter references ONE SHARED STATIC cache instance in its implementation - not reliable
-            // However for remote cache instances such as the AppFabricCache this is probably the correct idea/mindset.
-            this.cacheAdapter = new RuntimeMemoryCacheAdapter(); // TODO: This should probably be injected/servicelocated somehow so we can switch cache adapter without rebuilding.
-            this.policyAdapter = new RuntimeCacheItemPolicyAdapter();
-            //this.cacheAdapter = AppFabricCacheAdapter.Instance;
+            this.syncRoot = new object();
 
             // Absolute + Sliding is mutually exclusive don't do them both
             if (this.AbsoluteItemExpiration != 0)
             {
                 this.policyAdapter.AbsoluteExpiration = this.AbsoluteItemExpiration;
-            } 
+            }
             else if(this.SlidingItemExpiration != 0)
             {
                 this.policyAdapter.SlidingExpiration = this.SlidingItemExpiration;
@@ -141,7 +128,7 @@
         {
             // Initialise settings if not already initialised
             if (this.settings == null)
-            { 
+            {
                 this.settings = this.GetConfiguredCacheSettings();
             }
 
